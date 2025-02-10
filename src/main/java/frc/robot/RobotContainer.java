@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import frc.robot.commands.Autos;
+//import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SwerveCommand;
 
@@ -78,7 +78,7 @@ public class RobotContainer {
 
   private void configureAutoChooser() {
     // Autonomous Sendable Chooser
-    autoChooser = AutoBuilder.buildAutoChooser("Middle Side - 3 Note");
+   // autoChooser = AutoBuilder.buildAutoChooser("Middle Side - 3 Note");
 
     SmartDashboard.putData("Selected Auto", autoChooser);
   }
