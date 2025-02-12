@@ -6,9 +6,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class CoralIntake extends SubsystemBase {
-  /** Creates a new CoralIntake. */
-  public CoralIntake() {}
+public class ClawPivot extends SubsystemBase {
+  /** Creates a new ClawPivot. */
+  public ClawPivot() {}
 
   @Override
   public void periodic() {

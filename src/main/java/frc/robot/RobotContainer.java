@@ -55,14 +55,14 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    s_Swerve.configureAutoBuilder();
+   // s_Swerve.configureAutoBuilder();
 
     /* Setup */
     setUpSwerveController();
     // configureLimelight(Constants.Limelight.Front.NAME);
     // configureLimelight(Constants.Limelight.Back.NAME);
     configureBindings();
-    configureAutoChooser();
+    //configureAutoChooser();
 
   }
 
@@ -76,12 +76,12 @@ public class RobotContainer {
         () -> b_robotCentric.getAsBoolean()));
   }
 
-  private void configureAutoChooser() {
+  //private void configureAutoChooser() {
     // Autonomous Sendable Chooser
    // autoChooser = AutoBuilder.buildAutoChooser("Middle Side - 3 Note");
 
-    SmartDashboard.putData("Selected Auto", autoChooser);
-  }
+   // SmartDashboard.putData("Selected Auto", autoChooser);
+ // }
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be
@@ -106,8 +106,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  //public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return autoChooser.getSelected();
-  }
+  //  return autoChooser.getSelected();
+  //}
 }
