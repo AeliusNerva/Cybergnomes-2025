@@ -4,12 +4,26 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.hardware.TalonFX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClawPivot extends SubsystemBase {
   /** Creates a new ClawPivot. */
-  public ClawPivot() {}
 
+  private TalonFX fxPivotMotor;
+  private TalonFXConfiguration fxConfig;
+
+  public ClawPivot() {
+
+     fxPivotMotor = new TalonFX(0); 
+     fxConfig = new TalonFXConfiguration();
+     fxPivotMotor.getConfigurator().apply(fxConfig);
+     
+  }
+
+    
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

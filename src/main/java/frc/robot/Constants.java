@@ -31,7 +31,7 @@ public final class Constants {
         public static final double STICK_DEAD_BAND = 0.1;
         
    public static final class Swerve {
-
+// CHANGE WITH KRAKEN INFO!!!!
         //public static final int pigeonID = 1;
 
         // Always ensure Gyro is CCW+ CW-
@@ -156,4 +156,52 @@ public final class Constants {
                     DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
             }
    }
+
+   public static final class Elevator {
+        //Highest and lowest height that the elevator reaches
+        public static final double CANCODER_MIN = 0;
+        public static final double CANCODER_MAX = 100;
+   }
+
+   public static final class AlgaeIntake {
+        //Single falcon500 motor for algae intake
+        public static final class AlgaeIntakeMotor {
+                public static final int MOTOR_ID = 0; //FILL IN ID ONCE CONFIGURED!
+        }
+   }
+
+   public static final class ClawPivot {
+        //single falcon500 motor for the claw to pivot
+        public static final class ClawPivotMotor{
+                public static final double MOTOR_ID = 0; //FILL IN ID ONCE CONFIGURED!
+        }
+   }
+
+   public static final class VisionConstants {
+        public static final double REEF_APRILTAG_HEIGHT = 0.6875;
+        public static final double PROCCESSOR_APRILTAG_HEIGHT = 0.45875;
+        public static final double CORAL_APRILTAG_HEIGHT = 0.5325;
+   }
+
+   public static final class Limelight {
+        // height and angle of the right limelight
+        public static final class Right {
+            public static final String NAME = "limelight-gnomesr";
+
+            public static double ANGLE = 0;
+            public static double HEIGHT = 0.42008; 
+        }
+        // height and angle of the left limelight
+        public static final class Left {
+            public static final String NAME = "limelight-gnomesl";
+
+            public static double ANGLE = 0;
+            public static double HEIGHT = 0.42008;
+        }
+
+        public static final class Pipelines {
+           
+        }
+    }
+
 }
