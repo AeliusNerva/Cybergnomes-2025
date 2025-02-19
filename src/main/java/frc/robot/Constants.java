@@ -117,8 +117,10 @@ public final class Constants {
         public static final NeutralModeValue DRIVE_NEUTRAL_MODE = NeutralModeValue.Brake;
         public static final NeutralModeValue ANGLE_NEUTRAL_MODE = NeutralModeValue.Coast;
         public static final class Mod0 {
-                public static final int DRIVE_MOTOR_ID = 1;
-                public static final int ANGLE_MOTOR_ID = 11;
+
+                // Front Left 
+                public static final int DRIVE_MOTOR_ID = 1; //FLD (front left drive)
+                public static final int ANGLE_MOTOR_ID = 11; //FLS (front left swerve)
                 public static final int CANCODER_ID = 21;
                 public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(333.89);
                 public static final SwerveModuleConstants constants = new SwerveModuleConstants(
@@ -127,8 +129,8 @@ public final class Constants {
     
             /* Front Right Module - Module 1 */
             public static final class Mod1 {
-                public static final int DRIVE_MOTOR_ID = 2;
-                public static final int ANGLE_MOTOR_ID = 12;
+                public static final int DRIVE_MOTOR_ID = 2; //FRD
+                public static final int ANGLE_MOTOR_ID = 12; //FRS
                 public static final int CANCODER_ID = 22;
                 public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(40.78);
                 public static final SwerveModuleConstants constants = new SwerveModuleConstants(
@@ -138,8 +140,8 @@ public final class Constants {
     
             /* Back Left Module - Module 2 */
             public static final class Mod2 {
-                public static final int DRIVE_MOTOR_ID = 3;
-                public static final int ANGLE_MOTOR_ID = 13;
+                public static final int DRIVE_MOTOR_ID = 3; //BLD
+                public static final int ANGLE_MOTOR_ID = 13; //BLS
                 public static final int CANCODER_ID = 23;
                 public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-355.25);
                 public static final SwerveModuleConstants constants = new SwerveModuleConstants(
@@ -148,8 +150,8 @@ public final class Constants {
     
             /* Back Right Module - Module 3 */
             public static final class Mod3 {
-                public static final int DRIVE_MOTOR_ID = 4;
-                public static final int ANGLE_MOTOR_ID = 14;
+                public static final int DRIVE_MOTOR_ID = 4; //BRD
+                public static final int ANGLE_MOTOR_ID = 14; //BRS
                 public static final int CANCODER_ID = 24;
                 public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(-63.11);
                 public static final SwerveModuleConstants constants = new SwerveModuleConstants(
@@ -161,6 +163,24 @@ public final class Constants {
         //Highest and lowest height that the elevator reaches
         public static final double CANCODER_MIN = 0;
         public static final double CANCODER_MAX = 100;
+
+        public static final class LeftElevatorMotor{
+                public static final int MOTOR_ID = 5; //Elevator.L
+                public static final double ACCELERATION = 10;
+                public static final double MAX_SPEED = 10;
+                public static final double KP = 10;
+                public static final double KI = 10;
+                public static final double KD = 10;
+        }
+
+        public static final class RightElevatorMotor{
+                public static final int MOTOR_ID = 15; //Elevator.R
+                public static final double ACCELERATION = 10;
+                public static final double MAX_SPEED = 10;
+                public static final double KP = 10;
+                public static final double KI = 10;
+                public static final double KD = 10;
+        }
    }
 
    public static final class AlgaeIntake {
