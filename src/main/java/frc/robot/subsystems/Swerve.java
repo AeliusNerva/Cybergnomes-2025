@@ -15,12 +15,17 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 
 import com.studica.frc.AHRS.*;
 import com.studica.frc.AHRS;
+
+import java.util.function.Supplier;
+
+import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.*;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
@@ -31,6 +36,8 @@ public class Swerve extends SubsystemBase {
     public AHRS gyro;
 
     private Field2d field = new Field2d();
+
+    private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
 
     public Swerve() {
 
@@ -46,6 +53,10 @@ public class Swerve extends SubsystemBase {
      
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
     }
+
+      //public Command applyRequest(Supplier<SwerveRequest> requestSupplier) {
+       // return run(() -> this.setControl(requestSupplier.get()));
+   // }
 
     /* public void configureAutoBuilder() {
         try {

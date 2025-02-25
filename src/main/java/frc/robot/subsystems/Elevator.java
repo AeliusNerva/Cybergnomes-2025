@@ -27,8 +27,8 @@ public class Elevator extends SubsystemBase {
 
   public Elevator() {
     // Define motors
-    fxLeftElevatorMotor = new TalonFX(0);
-    fxRightElevatorMotor = new TalonFX(0);
+    fxLeftElevatorMotor = new TalonFX(5);
+    fxRightElevatorMotor = new TalonFX(15);
 
     // Configure motors
     fxElevatorConfig = new TalonFXConfiguration();

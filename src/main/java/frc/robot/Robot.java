@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.LimelightHelpers.LimelightTarget_Fiducial;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Swerve;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -20,13 +22,15 @@ public class Robot extends TimedRobot {
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
   private Command m_autonomousCommand;
 
-  private final RobotContainer m_robotContainer;
+  private RobotContainer m_robotContainer;
+  private final Elevator s_Elevator = RobotContainer.s_Elevator;
+  private final Swerve s_Swerve = RobotContainer.s_Swerve;
 
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  public Robot() {
+  public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();

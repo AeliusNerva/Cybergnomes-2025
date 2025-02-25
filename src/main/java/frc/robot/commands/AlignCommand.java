@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.VisionSubsystem;
 
-import frc.robot.generated.TunerConstants;
+//import frc.robot.generated.TunerConstants;
 
 public class AlignCommand extends Command {
     private final VisionSubsystem m_Vision; // Uses the vision subsystem to get information from the limelight
@@ -168,5 +168,4 @@ public class AlignCommand extends Command {
         targetingForwardSpeed *= -1.0;
         return targetingForwardSpeed;
     }
-}
-*/
+} */

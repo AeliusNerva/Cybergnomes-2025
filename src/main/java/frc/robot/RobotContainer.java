@@ -12,15 +12,20 @@ import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
+import frc.robot.commands.Elevator.ElevatorCommand;
+import frc.robot.commands.Elevator.ReverseElevatorCommand;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -41,6 +46,8 @@ public class RobotContainer {
  
   // Subsytems
   public static final Swerve s_Swerve = new Swerve();
+  public static final Elevator s_Elevator = new Elevator();
+  public static final Timer shooterTimer = new Timer();
 
   /* Sendable Chooser and Autonomus Commands */
   private static SendableChooser<Command> autoChooser;
@@ -50,6 +57,16 @@ public class RobotContainer {
   public static final int strafeAxis = PS4Controller.Axis.kLeftX.value;
   private final int rotationAxis = PS4Controller.Axis.kRightX.value;
   private final int rotationTargetAxis = 3; // RightY: 3;
+
+  
+    // spin elevator motors (2 motors) to move elevator (upwards)
+    private final JoystickButton b_spinElevator = new JoystickButton(driver, PS4Controller.Button.kL2.value);
+
+    // Spin elevator motors (2 motors) backward (down)
+    private final JoystickButton b_reverseElevator = new JoystickButton(driver, PS4Controller.Button.kL1.value);
+
+   
+
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -63,6 +80,8 @@ public class RobotContainer {
     //configureLimelight(Constants.Limelight.Back.NAME);
     configureBindings();
     //configureAutoChooser();
+
+
 
   }
 
@@ -99,8 +118,16 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
+       /* Intake Buttons */
+
+       b_spinElevator.whileTrue(new ElevatorCommand());
+       b_reverseElevator.whileTrue(new ReverseElevatorCommand());
+
   }
 
+  private void stopMotors() {
+    s_Elevator.setSpeed(0);
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
