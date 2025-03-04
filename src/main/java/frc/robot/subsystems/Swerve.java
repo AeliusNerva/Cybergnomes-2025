@@ -5,6 +5,8 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import static edu.wpi.first.units.Units.*;
+
 
 // import com.ctre.phoenix6.configs.Pigeon2Configuration;
 // import com.ctre.phoenix6.hardware.Pigeon2;
@@ -13,6 +15,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.units.measure.LinearVelocity;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -26,6 +29,7 @@ import com.studica.frc.AHRS;
 import java.util.function.Supplier;
 
 import com.ctre.phoenix6.swerve.SwerveRequest;
+import com.ctre.phoenix6.swerve.SwerveRequest.RobotCentric;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.*;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
@@ -34,6 +38,9 @@ public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public AHRS gyro;
+        // Theoretical free speed (m/s) at 12 V applied output;
+    // This needs to be tuned to your individual robot
+    public static final LinearVelocity kSpeedAt12Volts = MetersPerSecond.of(6.21);
 
     private Field2d field = new Field2d();
 
@@ -196,5 +203,10 @@ public class Swerve extends SubsystemBase {
         }
 
         SmartDashboard.putData(field);
+    }
+
+    public void setControl(RobotCentric withRotationalRate) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setControl'");
     }
 }

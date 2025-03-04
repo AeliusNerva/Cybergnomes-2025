@@ -7,12 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import frc.robot.RobotContainer;
 
 /** Add your docs here. */
 public class PneumaticsHandler {
+
     private final Compressor compressor = new Compressor(PneumaticsModuleType.REVPH);
     private final Solenoid s_clawBlock = new Solenoid(PneumaticsModuleType.REVPH, 123); //FILL IN!!!
-
 
     public PneumaticsHandler() {
         compressor.enableAnalog(Constants.Pneumatics.MIN_PRESSURE, Constants.Pneumatics.MAX_PRESSURE);
@@ -21,8 +22,8 @@ public class PneumaticsHandler {
     /** Activate/Deactivate claw
      * @param value true: blocked, false: released
      */
-    public void setClimberSolenoid(boolean value) {
+    public void setClawSolenoid(boolean value) {
         s_clawBlock.set(value);
     }
 
-}
+    } 

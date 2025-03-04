@@ -25,6 +25,7 @@ import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import frc.robot.commands.Elevator.ElevatorCommand;
 import frc.robot.commands.Elevator.ReverseElevatorCommand;
+//import frc.robot.generated.TunerConstants;
 
 
 /**
@@ -76,14 +77,20 @@ public class RobotContainer {
 
     /* Setup */
     setUpSwerveController();
-    //configureLimelight(Constants.Limelight.Front.NAME);
-    //configureLimelight(Constants.Limelight.Back.NAME);
+    configureLimelight(Constants.Limelight.Right.NAME);
+    configureLimelight(Constants.Limelight.Left.NAME);
     configureBindings();
     //configureAutoChooser();
 
 
 
   }
+
+ // public static final PneumaticsHandler h_pneumatics = new PneumaticsHandler();
+
+ /*  private void preparePneumatics() {
+    h_pneumatics.setClawSolenoid(false);
+  }*/
 
   private void setUpSwerveController() {
     s_Swerve.setDefaultCommand(new SwerveCommand(
@@ -95,6 +102,11 @@ public class RobotContainer {
         () -> b_robotCentric.getAsBoolean()));
   }
 
+  private void configureLimelight(String limelightName) {
+    LimelightHelpers.setLEDMode_ForceOn(limelightName);
+    LimelightHelpers.setStreamMode_Standard(limelightName);
+    LimelightHelpers.setCameraMode_Processor(limelightName);
+}
   //private void configureAutoChooser() {
     // Autonomous Sendable Chooser
    // autoChooser = AutoBuilder.buildAutoChooser("Middle Side - 3 Note");
@@ -126,7 +138,7 @@ public class RobotContainer {
   }
 
   private void stopMotors() {
-    s_Elevator.setSpeed(0);
+    //s_Elevator.setSpeed(0);
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

@@ -47,6 +47,18 @@ public final class Constants {
         private static final double WHEEL_BASE = Units.inchesToMeters(22.25);
         public static final double WHEEL_CIRCUMFERENCE = chosenModule.wheelCircumference;
 
+        //Coral/claw height constants
+//public static final class ElevatorConstants{
+
+        public static final double kElevatorErrorTolerance = 0.5;
+
+        public static final double StoreHeight = 0.0;
+        public static final double L2Height = 9.0;
+        public static final double L3Height = 25.14;
+        public static final double L4Height = 52.0;
+        public static final double MaxHeight = 56.2;
+
+       // }
         /*
          * Swerve Kinematics
          * No need to ever change this unless you are not doing a traditional
@@ -159,6 +171,17 @@ public final class Constants {
             }
    }
 
+   //PNEUMATICS
+   public static final class Pneumatics {
+       /*  public static final int CLIMBER_ID = 15;
+        public static final int SHOOTER_ID = 12;
+        public static final int PUSHER_ID = 13; */
+
+        public static final double MIN_PRESSURE = 70;
+        public static final double MAX_PRESSURE = 120;
+    }
+
+    //ELEVATOR
    public static final class Elevator {
         //Highest and lowest height that the elevator reaches
         public static final double CANCODER_MIN = 0;
@@ -206,14 +229,14 @@ public final class Constants {
    public static final class Limelight {
         // height and angle of the right limelight
         public static final class Right {
-            public static final String NAME = "limelight-gnomesr";
+            public static final String NAME = "limelight_2";
 
             public static double ANGLE = 0;
             public static double HEIGHT = 0.42008; 
         }
         // height and angle of the left limelight
         public static final class Left {
-            public static final String NAME = "limelight-gnomesl";
+            public static final String NAME = "limelight_1";
 
             public static double ANGLE = 0;
             public static double HEIGHT = 0.42008;

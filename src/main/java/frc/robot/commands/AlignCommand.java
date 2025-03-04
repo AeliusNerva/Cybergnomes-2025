@@ -1,6 +1,6 @@
 package frc.robot.commands;
 
- /*import static edu.wpi.first.units.Units.*;
+ import static edu.wpi.first.units.Units.*;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveModule.SteerRequestType;
@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.VisionSubsystem;
+
+import frc.robot.Constants;
 
 //import frc.robot.generated.TunerConstants;
 
@@ -53,7 +55,7 @@ public class AlignCommand extends Command {
             .withRotationalDeadband(0.1)
             .withDriveRequestType(DriveRequestType.Velocity)
             .withSteerRequestType(SteerRequestType.MotionMagicExpo);
-        MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond) * 0.5;
+        MaxSpeed = swerve.kSpeedAt12Volts.in(MetersPerSecond) * 0.5;
         MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond) * 0.5;
         addRequirements(m_Vision, m_Swerve);
     }
@@ -168,4 +170,4 @@ public class AlignCommand extends Command {
         targetingForwardSpeed *= -1.0;
         return targetingForwardSpeed;
     }
-} */
+} 

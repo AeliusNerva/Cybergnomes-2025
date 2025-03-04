@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
-    CommandScheduler.getInstance().run();
+   CommandScheduler.getInstance().run();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -94,7 +94,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
-    CommandScheduler.getInstance().cancelAll();
+   CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */

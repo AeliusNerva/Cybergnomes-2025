@@ -3,15 +3,30 @@
 // the WPILib BSD license file in the root directory of this project.
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.LimelightHelpers;
 
 public class VisionSubsystem extends SubsystemBase {
   /** Creates a new VisionSubsystem. */
-  public VisionSubsystem() {}
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  public VisionSubsystem() {
+ // Initialize the Limelight here
   }
+
+    public double getTargetAngle() {
+        return NetworkTableInstance.getDefault().getTable("limelight-b").getEntry("tx").getDouble(0.0);
+    }
+
+    public double getTargetTY() {
+        return NetworkTableInstance.getDefault().getTable("limelight-b").getEntry("ty").getDouble(0.0);
+    }
+
+    public double getTargetTX() {
+        return NetworkTableInstance.getDefault().getTable("limelight-b").getEntry("tx").getDouble(0.0);
+    }
+
+    public double[] get3DPose() {
+        return NetworkTableInstance.getDefault().getTable("limelight-b").getEntry("camtran").getDoubleArray(new double[6]);
+    }
+  
 }

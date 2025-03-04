@@ -17,7 +17,7 @@ public class ClawPivot extends SubsystemBase {
 
   public ClawPivot() {
 
-     fxPivotMotor = new TalonFX(0); 
+     fxPivotMotor = new TalonFX(0); //FILL IN!!!!!
      fxConfig = new TalonFXConfiguration();
      fxPivotMotor.getConfigurator().apply(fxConfig);
      
