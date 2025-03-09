@@ -131,9 +131,9 @@ public final class Constants {
         public static final class Mod0 {
 
                 // Front Left - Mod 0
-                public static final int DRIVE_MOTOR_ID = 1; //FLD (front left drive)
-                public static final int ANGLE_MOTOR_ID = 11; //FLS (front left swerve)
-                public static final int CANCODER_ID = 21;
+                public static final int DRIVE_MOTOR_ID = 8; //FLD (front left drive)
+                public static final int ANGLE_MOTOR_ID = 18; //FLS (front left swerve)
+                public static final int CANCODER_ID = 28;
                 public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(179.47);
                 public static final SwerveModuleConstants constants = new SwerveModuleConstants(
                     DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
@@ -162,7 +162,7 @@ public final class Constants {
     
             /* Back Right Module - Module 3 */
             public static final class Mod3 {
-                public static final int DRIVE_MOTOR_ID = 4; //BRD
+                public static final int DRIVE_MOTOR_ID = 34; //BRD
                 public static final int ANGLE_MOTOR_ID = 14; //BRS
                 public static final int CANCODER_ID = 24;
                 public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(129.38);
@@ -173,8 +173,9 @@ public final class Constants {
 
    //PNEUMATICS
    public static final class Pneumatics {
-       /*  public static final int CLIMBER_ID = 15;
-        public static final int SHOOTER_ID = 12;
+        //public static final int CLAW_ID = ;
+        public static final int CORALINTAKE_ID = 0;
+        /*public static final int SHOOTER_ID = 12;
         public static final int PUSHER_ID = 13; */
 
         public static final double MIN_PRESSURE = 70;
@@ -206,19 +207,45 @@ public final class Constants {
         }
    }
 
-   public static final class AlgaeIntake {
+   public static final class Algae {
         //Single falcon500 motor for algae intake
         public static final class AlgaeIntakeMotor {
-                public static final int MOTOR_ID = 0; //FILL IN ID ONCE CONFIGURED!
+                public static final int MOTOR_ID = 6; //FILL IN ID ONCE CONFIGURED!
+
+        public static final double CANCODER_MIN = 0;
+        public static final double CANCODER_MAX = 100;
+
+        public static final class AlgaeIntake{
+                public static final int MOTOR_ID = 6; 
+                public static final double ACCELERATION = 10;
+                public static final double MAX_SPEED = 10;
+                public static final double KP = 10;
+                public static final double KI = 10;
+                public static final double KD = 10;
+        }
         }
    }
 
-   public static final class ClawPivot {
+   public static final class Claw {
         //single falcon500 motor for the claw to pivot
+
         public static final class ClawPivotMotor{
-                public static final double MOTOR_ID = 0; //FILL IN ID ONCE CONFIGURED!
+                public static final int MOTOR_ID = 7; 
+                public static final double ACCELERATION = 10;
+                public static final double MAX_SPEED = 10;
+                public static final double KP = 10;
+                public static final double KI = 10;
+                public static final double KD = 10;
+
+                public static final double CANCODER_MIN = 0; //FILL IN!!!
+                public static final double CANCODER_MAX = 90; //FILL IN!!!
+
+                //Threshold to determine if the pivot has fully rotated back (used for math check in pivot command)
+                public static final double PIVOT_ANGLE_THRESHOLD = 1.0;
+        
         }
-   }
+        }
+   
 
    public static final class VisionConstants {
         public static final double REEF_APRILTAG_HEIGHT = 0.6875;

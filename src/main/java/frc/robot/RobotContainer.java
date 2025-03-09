@@ -25,6 +25,7 @@ import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import frc.robot.commands.Elevator.ElevatorCommand;
 import frc.robot.commands.Elevator.ReverseElevatorCommand;
+import frc.robot.commands.CoralIntakeCommand;
 //import frc.robot.generated.TunerConstants;
 
 
@@ -49,6 +50,8 @@ public class RobotContainer {
   public static final Swerve s_Swerve = new Swerve();
   public static final Elevator s_Elevator = new Elevator();
   public static final Timer shooterTimer = new Timer();
+  public static final CoralIntake s_CoralIntake = new CoralIntake();
+  public static final Pivot s_Pivot = new Pivot();
 
   /* Sendable Chooser and Autonomus Commands */
   private static SendableChooser<Command> autoChooser;
@@ -65,6 +68,8 @@ public class RobotContainer {
 
     // Spin elevator motors (2 motors) backward (down)
     private final JoystickButton b_reverseElevator = new JoystickButton(driver, PS4Controller.Button.kL1.value);
+
+    private final JoystickButton b_clawPivot = new JoystickButton(driver, PS4Controller.Button.kSquare.value);
 
    
 
@@ -86,11 +91,11 @@ public class RobotContainer {
 
   }
 
- // public static final PneumaticsHandler h_pneumatics = new PneumaticsHandler();
+  public static final PneumaticsHandler h_pneumatics = new PneumaticsHandler();
 
- /*  private void preparePneumatics() {
-    h_pneumatics.setClawSolenoid(false);
-  }*/
+  private void preparePneumatics() {
+    h_pneumatics.setCoralPusherSolenoid(false);
+ }
 
   private void setUpSwerveController() {
     s_Swerve.setDefaultCommand(new SwerveCommand(
@@ -138,8 +143,10 @@ public class RobotContainer {
   }
 
   private void stopMotors() {
-    //s_Elevator.setSpeed(0);
+    s_Elevator.setSpeed(0);
+    //s_ClawPivot.setSpeed(0);
   }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

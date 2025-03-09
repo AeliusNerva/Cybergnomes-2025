@@ -13,17 +13,20 @@ import frc.robot.RobotContainer;
 public class PneumaticsHandler {
 
     private final Compressor compressor = new Compressor(PneumaticsModuleType.REVPH);
-    private final Solenoid s_clawBlock = new Solenoid(PneumaticsModuleType.REVPH, 123); //FILL IN!!!
+    private final Solenoid s_coralPusherBlock = new Solenoid(PneumaticsModuleType.REVPH, 0); 
 
     public PneumaticsHandler() {
         compressor.enableAnalog(Constants.Pneumatics.MIN_PRESSURE, Constants.Pneumatics.MAX_PRESSURE);
-    }
-
+   }
     /** Activate/Deactivate claw
      * @param value true: blocked, false: released
      */
-    public void setClawSolenoid(boolean value) {
-        s_clawBlock.set(value);
+    //public void setClawSolenoid(boolean value) {
+      // s_clawBlock.set(value);
+  //  }
+
+    public void setCoralPusherSolenoid(boolean value) {
+        s_coralPusherBlock.set(value);
     }
 
     } 

@@ -9,9 +9,12 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+//import frc.robot.Constants.Claw.ClawPivotMotor.ClawPivot;
 import frc.robot.LimelightHelpers.LimelightTarget_Fiducial;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.Claw;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -25,6 +28,8 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private final Elevator s_Elevator = RobotContainer.s_Elevator;
   private final Swerve s_Swerve = RobotContainer.s_Swerve;
+  private final Pivot s_Pivot = RobotContainer.s_Pivot;
+  private final PneumaticsHandler h_pneumatics = RobotContainer.h_pneumatics;
 
   /**
    * This function is run when the robot is first started up and should be used for any

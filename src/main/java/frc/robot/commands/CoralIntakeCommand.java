@@ -2,15 +2,26 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-/*package frc.robot.commands.Claw;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.PneumaticsHandler;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.CoralIntake;
+import frc.robot.Constants;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-/*public class ClawPivotCommand extends Command {
-  /** Creates a new ClawPivotCommand. */
- /*  public ClawPivotCommand() {
+public class CoralIntakeCommand extends Command {
+  /** Creates a new CoralIntake. */
+
+  //Pushing pnuematic mechanism that will push the coral into the claw
+
+  private final CoralIntake s_coralPusher = RobotContainer.s_CoralIntake;
+  private final PneumaticsHandler h_pneumatics = RobotContainer.h_pneumatics;
+
+  public CoralIntakeCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
+  
   }
 
   // Called when the command is initially scheduled.
@@ -30,4 +41,4 @@ import edu.wpi.first.wpilibj2.command.Command;
   public boolean isFinished() {
     return false;
   }
-}*/
+}
