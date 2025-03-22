@@ -31,32 +31,32 @@ public final class Constants {
         public static final double STICK_DEAD_BAND = 0.1;
         
    public static final class Swerve {
-// CHANGE WITH KRAKEN INFO!!!!
-        //public static final int pigeonID = 1;
 
         // Always ensure Gyro is CCW+ CW-
         public static final boolean INVERT_GYRO = true;
 
         private static final COTSTalonFXSwerveConstants chosenModule =
-                COTSTalonFXSwerveConstants.SDS.MK4.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4.driveRatios.L2);
+                COTSTalonFXSwerveConstants.SDS.MK4.KrakenX60(COTSTalonFXSwerveConstants.SDS.MK4.driveRatios.L2);
+
+        
 
         /* Drivetrain Constants */
         // Distance from left wheel to right
-        private static final double TRACK_WIDTH = Units.inchesToMeters(25);
+        private static final double TRACK_WIDTH = Units.inchesToMeters(22.5);
         // Distance from front wheel to back
-        private static final double WHEEL_BASE = Units.inchesToMeters(22.25);
+        private static final double WHEEL_BASE = Units.inchesToMeters(25);
         public static final double WHEEL_CIRCUMFERENCE = chosenModule.wheelCircumference;
 
         //Coral/claw height constants
 //public static final class ElevatorConstants{
 
-        public static final double kElevatorErrorTolerance = 0.5;
+       /*  public static final double kElevatorErrorTolerance = 0.5;
 
         public static final double StoreHeight = 0.0;
         public static final double L2Height = 9.0;
         public static final double L3Height = 25.14;
         public static final double L4Height = 52.0;
-        public static final double MaxHeight = 56.2;
+        public static final double MaxHeight = 56.2;*/
 
        // }
         /*
@@ -87,7 +87,7 @@ public final class Constants {
         public static final double ANGLE_CURRENT_THRESHOLD_TIME = 0.1;
         public static final boolean ANGLE_ENABLE_CURRENT_LIMIT = true;
 
-        public static final int driveCurrentLimit = 35;
+        public static final int driveCurrentLimit = 50;
         public static final int DIVE_CURRENT_THRESHOLD = 60;
         public static final double DRIVE_CURRENT_THRESHOLD_TIME = 0.1;
         public static final boolean DRIVE_ENABLE_CURRENT_LIMIT = true;
@@ -118,7 +118,7 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double MAX_SPEED = 4.5;
+        public static final double  MAX_SPEED = 4.5;
         /** Radians per Second */
         public static final double MAX_ANGULAR_VELOCITY = 4.5;
 
@@ -175,35 +175,66 @@ public final class Constants {
    public static final class Pneumatics {
         //public static final int CLAW_ID = ;
         public static final int CORALINTAKE_ID = 0;
+
+        public static final int ALGAEINTAKE1_ID = 1;
+        public static final int ALGAEINTAKE2_ID = 2;
         /*public static final int SHOOTER_ID = 12;
         public static final int PUSHER_ID = 13; */
 
-        public static final double MIN_PRESSURE = 70;
+        public static final double MIN_PRESSURE = 100;
         public static final double MAX_PRESSURE = 120;
+
     }
 
     //ELEVATOR
    public static final class Elevator {
+       
+        public static final NeutralModeValue DRIVE_NEUTRAL_MODE = NeutralModeValue.Brake;
+        public static final NeutralModeValue ANGLE_NEUTRAL_MODE = NeutralModeValue.Brake;
         //Highest and lowest height that the elevator reaches
-        public static final double CANCODER_MIN = 0;
-        public static final double CANCODER_MAX = 100;
+        public static final double ELEVATOR_MIN = -50;
+        public static final double ELEVATOR_MAX = 0.2;
+
+        public static final double ELEVATOR_POS = 0.8; //ADJUST THIS!!!!
+
+        //Heights/Positions
+        //public static final double MOVE_POSITION = -2;
+
+        //public static final double L2Height = 9.0;
+        public static enum ElevatorSetPosition{
+                LEVEL_1_HEIGHT (-30),
+                LEVEL_2_HEIGHT (2),
+                LEVEL_3_HEIGHT (3),
+                LEVEL_4_HEIGHT (4),
+                ZERO_HEIGHT (0);
+
+                public final double position;
+
+                ElevatorSetPosition(double setPosition) {
+                        position = setPosition;
+                }
+        }
 
         public static final class LeftElevatorMotor{
-                public static final int MOTOR_ID = 5; //Elevator.L
-                public static final double ACCELERATION = 10;
-                public static final double MAX_SPEED = 10;
-                public static final double KP = 10;
-                public static final double KI = 10;
-                public static final double KD = 10;
+                public static final NeutralModeValue DRIVE_NEUTRAL_MODE = NeutralModeValue.Brake;
+                public static final NeutralModeValue ANGLE_NEUTRAL_MODE = NeutralModeValue.Brake;
+                public static final int MOTOR_ID = 39; //Elevator.L
+                public static final double ACCELERATION = 1;
+                public static final double MAX_SPEED = 1;
+                public static final double KP = 0.2;
+                public static final double KI = 0;
+                public static final double KD = 0;
         }
 
         public static final class RightElevatorMotor{
+                public static final NeutralModeValue DRIVE_NEUTRAL_MODE = NeutralModeValue.Brake;
+                public static final NeutralModeValue ANGLE_NEUTRAL_MODE = NeutralModeValue.Brake;
                 public static final int MOTOR_ID = 15; //Elevator.R
-                public static final double ACCELERATION = 10;
-                public static final double MAX_SPEED = 10;
-                public static final double KP = 10;
-                public static final double KI = 10;
-                public static final double KD = 10;
+                public static final double ACCELERATION = 1;
+                public static final double MAX_SPEED = 1;
+                public static final double KP = 0.2;
+                public static final double KI = 0;
+                public static final double KD = 0;
         }
    }
 
@@ -217,8 +248,8 @@ public final class Constants {
 
         public static final class AlgaeIntake{
                 public static final int MOTOR_ID = 6; 
-                public static final double ACCELERATION = 10;
-                public static final double MAX_SPEED = 10;
+                public static final double ACCELERATION = 6;
+                public static final double MAX_SPEED = 6;
                 public static final double KP = 10;
                 public static final double KI = 10;
                 public static final double KD = 10;
@@ -228,17 +259,33 @@ public final class Constants {
 
    public static final class Claw {
         //single falcon500 motor for the claw to pivot
+        public static final NeutralModeValue DRIVE_NEUTRAL_MODE = NeutralModeValue.Brake;
+        public static final NeutralModeValue ANGLE_NEUTRAL_MODE = NeutralModeValue.Brake;
 
-        public static final class ClawPivotMotor{
-                public static final int MOTOR_ID = 7; 
-                public static final double ACCELERATION = 10;
-                public static final double MAX_SPEED = 10;
-                public static final double KP = 10;
-                public static final double KI = 10;
-                public static final double KD = 10;
+        public static double PIVOT_POS = 0.8;
 
-                public static final double CANCODER_MIN = 0; //FILL IN!!!
-                public static final double CANCODER_MAX = 90; //FILL IN!!!
+        public static enum PivotSetPosition{
+                UP(7), //CHANGE THESE ONCE TESTED!!!!!!!!!!!!
+                OUT(1);
+
+
+                public final double pivotPosition;
+
+                PivotSetPosition(double setPivotPosition) {
+                        pivotPosition = setPivotPosition;
+                }
+        }
+
+        public static final class PivotMotor{
+                public static final int MOTOR_ID = 7; //Pivot motor
+                public static final double ACCELERATION = 6;
+                public static final double MAX_SPEED = 6;
+                public static final double KP = 0.1;
+                public static final double KI = 0;
+                public static final double KD = 0;
+
+                public static final double CANCODER_MIN = 0.078; //FILL IN!!!
+                public static final double CANCODER_MAX = 0.2; //FILL IN!!!
 
                 //Threshold to determine if the pivot has fully rotated back (used for math check in pivot command)
                 public static final double PIVOT_ANGLE_THRESHOLD = 1.0;
@@ -273,5 +320,25 @@ public final class Constants {
            
         }
     }
+
+    public static final class Autos {
+        public static final double MAX_SPEED_IN_METERS_PER_SECOND = 3;
+        public static final double MAX_ACCELERATION_IN_METERS_PER_SECOND_SQUARED = 3;
+        public static final double MAX_ANGULAR_SPEED_IN_RADIANS_PER_SECOND = Math.PI;
+        public static final double MAX_ANGULAR_ACCELERATION_IN_RADIANS_PER_SECOND_SQUARED = Math.PI;
+
+        public static final double CONTROLLER_PX = 4;
+        public static final double CONTROLLER_PY = 4;
+        public static final double CONTROLLER_ANGLE = 2;
+
+        /* For a more smooth rotation */
+        public static final double LARGEST_POSSIBLE_ROTATION = 25;
+
+        /* Constraint for the motion profilied robot angle controller */
+        public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
+                MAX_ANGULAR_SPEED_IN_RADIANS_PER_SECOND, MAX_ANGULAR_ACCELERATION_IN_RADIANS_PER_SECOND_SQUARED);
+    }
+
+
 
 }

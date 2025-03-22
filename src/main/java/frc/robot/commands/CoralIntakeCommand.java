@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.PneumaticsHandler;
 import frc.robot.RobotContainer;
@@ -16,29 +17,45 @@ public class CoralIntakeCommand extends Command {
 
   //Pushing pnuematic mechanism that will push the coral into the claw
 
-  private final CoralIntake s_coralPusher = RobotContainer.s_CoralIntake;
+  private final CoralIntake s_coralPusherBlock = RobotContainer.s_CoralIntake;
   private final PneumaticsHandler h_pneumatics = RobotContainer.h_pneumatics;
 
-  public CoralIntakeCommand() {
+    private final double speed;
+    private final Timer timer = new Timer();
+
+
+    public CoralIntakeCommand(double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.speed = speed;
   
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer.restart();
+    // Unlock climber
+    h_pneumatics.setCoralPusherSolenoid(false);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    
+    h_pneumatics.setCoralPusherSolenoid(true);
+    timer.stop();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+   
     return false;
   }
 }

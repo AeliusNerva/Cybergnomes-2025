@@ -15,10 +15,22 @@ public class ReverseElevatorCommand extends Command {
   /** Creates a new ReverseElevator. */
 
   private final Elevator s_Elevator = RobotContainer.s_Elevator;
+  private final double speed;
+  //private final double position;
 
+  public ReverseElevatorCommand(double speed) {
+    //requires(RobotContainer.s_Elevator);
 
-  public ReverseElevatorCommand() {
-    // Use addRequirements() here to declare subsystem dependencies.
+   
+  
+   /*  if (isFinished()) {
+      cancel();
+      return;
+    }
+*/
+    this.speed = speed;
+    //this.position = position;
+    //this.height = height;
   }
 
   // Called when the command is initially scheduled.
@@ -27,7 +39,9 @@ public class ReverseElevatorCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      s_Elevator.setSpeed(-0.5);
+      s_Elevator.setSpeed(speed);
+      
+     // s_Elevator.setHeight(Constants.Elevator.MOVE_POSITION);
   }
 
   // Called once the command ends or is interrupted.

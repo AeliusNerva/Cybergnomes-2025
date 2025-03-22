@@ -8,8 +8,8 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import static edu.wpi.first.units.Units.*;
 
 
-// import com.ctre.phoenix6.configs.Pigeon2Configuration;
-// import com.ctre.phoenix6.hardware.Pigeon2;
+ import com.ctre.phoenix6.configs.Pigeon2Configuration;
+ import com.ctre.phoenix6.hardware.Pigeon2;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -61,11 +61,11 @@ public class Swerve extends SubsystemBase {
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
     }
 
-      //public Command applyRequest(Supplier<SwerveRequest> requestSupplier) {
-       // return run(() -> this.setControl(requestSupplier.get()));
-   // }
+      public Command applyRequest(Supplier<SwerveRequest> requestSupplier) {
+        return run(() -> this.setControl(requestSupplier.get()));
+    }
 
-    /* public void configureAutoBuilder() {
+     public void configureAutoBuilder() {
         try {
             // Configure AutoBuilder last
             RobotConfig config = RobotConfig.fromGUISettings();
@@ -95,7 +95,7 @@ public class Swerve extends SubsystemBase {
         } catch (Exception e) {
             DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder", e.getStackTrace());
         }
-    }*/
+    }
 
     public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
         ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02);
@@ -205,7 +205,7 @@ public class Swerve extends SubsystemBase {
         SmartDashboard.putData(field);
     }
 
-    public void setControl(RobotCentric withRotationalRate) {
+    public void setControl(SwerveRequest withRotationalRate) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setControl'");
     }

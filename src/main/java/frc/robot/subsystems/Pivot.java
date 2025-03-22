@@ -11,12 +11,15 @@ import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Constants.Claw.ClawPivotMotor;
+import frc.robot.Constants.Claw.PivotMotor;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Pivot;
+
 
 public class Pivot extends SubsystemBase {
   /** Creates a new ClawPivot. */
@@ -25,9 +28,27 @@ public class Pivot extends SubsystemBase {
   private TalonFXConfiguration fxPivotConfig;
   private final MotionMagicVoltage m_mmReq = new MotionMagicVoltage(0);
 
+  private final Pivot s_Pivot = RobotContainer.s_Pivot;
+  private static Pivot instance = null;
+
+  public double pivotTargetPosition = 0;
+  public double pivotPrevPosition = 0;
+
+  private final PIDController pivotController;
+
+  public static Pivot getInstance() {
+    if (instance == null) {
+      instance = new Pivot();
+    }
+    return instance;
+  }
+
+  private double targetAngle;// Target Angle for the claw to pivot in degrees
+
   public Pivot() {
     // Define motor
-     fxPivotMotor = new TalonFX(Constants.Claw.ClawPivotMotor.MOTOR_ID); 
+     fxPivotMotor = new TalonFX(7); 
+     
      //configure motor
      fxPivotConfig = new TalonFXConfiguration();
 
@@ -35,50 +56,55 @@ public class Pivot extends SubsystemBase {
     fxPivotMotor.getConfigurator().apply(fxPivotConfig);
     fxPivotMotor.setNeutralMode(NeutralModeValue.Brake);
 
-    //angleMotionMagic.MotionMagicAcceleration = Constants.Claw.ClawPivotMotor.ACCELERATION;
-    //angleMotionMagic.MotionMagicCruiseVelocity = Constants.Claw.ClawPivotMotor.MAX_SPEED;
-       // Apply configurations
-       fxPivotMotor.getConfigurator().apply(fxPivotConfig); 
+    pivotController = new PIDController(0.01, 0, 0 );
+
+    MotionMagicConfigs angleMotionMagic = fxPivotConfig.MotionMagic;
+    angleMotionMagic.MotionMagicAcceleration = Constants.Claw.PivotMotor.ACCELERATION;
+    angleMotionMagic.MotionMagicCruiseVelocity = Constants.Claw.PivotMotor.MAX_SPEED;
 
         Slot0Configs slot0 = fxPivotConfig.Slot0;
-        slot0.kP = Constants.Claw.ClawPivotMotor.KP;
-        slot0.kI = Constants.Claw.ClawPivotMotor.KI;
-        slot0.kD = Constants.Claw.ClawPivotMotor.KD;
-     
+        slot0.kP = Constants.Claw.PivotMotor.KP;
+        slot0.kI = Constants.Claw.PivotMotor.KI;
+        slot0.kD = Constants.Claw.PivotMotor.KD;
   }
 
+
   //Sets the speed for to pivot motor
-  public void setPivotSpeed(double speedPercent) {
+  public void setSpeed(double speedPercent) {
     fxPivotMotor.set(speedPercent);
+  }
+
+  public double getPosition() {
+    return fxPivotMotor.getPosition().getValueAsDouble();
 }
 
-  public void setPivotAngle(double degrees) {
-// converts degrees into encoder values
-    double targetEncoderValue = degrees * 0.78;
-
-    if (targetEncoderValue < Constants.Claw.ClawPivotMotor.CANCODER_MIN) //MIN is 0 see constants
-        targetEncoderValue = Constants.Claw.ClawPivotMotor.CANCODER_MIN;
-
-    else if (targetEncoderValue > Constants.Claw.ClawPivotMotor.CANCODER_MAX) //MAX is 90 see constants
-        targetEncoderValue = Constants.Claw.ClawPivotMotor.CANCODER_MAX;
-
-    setPivotAngle(targetEncoderValue);
-
-    fxPivotMotor.setControl(m_mmReq.withPosition(targetEncoderValue).withSlot(0));
+  public void setPosition(double position) {
+  fxPivotMotor.set(pivotController.calculate(getPosition(), position));
 }
 
-public void setZero(){
-  fxPivotMotor.setPosition(0);
-}
+public void setTargetPosition( double targetPosition) {
+  pivotTargetPosition = targetPosition;
+ }
 
-public Angle getPivotPosition() {
-  return fxPivotMotor.getRotorPosition().getValue();
-}
- // COME BACK TO THIS!!!!!!!!!!!!!!!
+ public void resetPrevPosition( double prevPosition) {
+  pivotPrevPosition = prevPosition;
+ }
+
+ public boolean isAtTargetPosition() {
+  if ( Math.abs(pivotTargetPosition - s_Pivot.getPosition()) < Constants.Claw.PIVOT_POS)
+    return true;
+  else
+    return false;
+ }
+
+ public void stopMotor() {
+  s_Pivot.stopMotor();
+ }
  
  
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Claw pivot position", fxPivotMotor.getPosition().getValueAsDouble());
     // This method will be called once per scheduler run
     //   SmartDashboard.putNumber("Claw Pivot Angle", fxPivotMotor.getRotorPosition().getValue());
   }
